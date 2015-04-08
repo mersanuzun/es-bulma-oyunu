@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <meta name="name" content="content" charset="UTF-8">
+    <title></title>
+    <script type="text/javascript"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <style>
+      #table {
+        margin : 0px auto;
+      }
+      #table td{
+        width : 50px;
+        height : 50px;
+        border : 1px solid;
+        text-align : center;
+      }
+    </style>
+    <script>
+      function varMi (finished, coor){
+        if (finished.indexOf(coor) == -1) return false
+        else return true;
+      }
+      function olustur(board){
+        if (board % 2 == 1){
+          return -1;
+        }else{
+          var counter = 1;
+          var value = 0;
+          var boardSymbol = [];
+          for (var i = 0; i < board; i++){
+            boardSymbol.push([]);
+          }
+          var finished = [];
+          while (finished.length != board*board){
+            var coorX = Math.floor(Math.random() * board);
+            var coorY = Math.floor(Math.random() * board);
+            coor = coorX + "" + coorY;
+            if (!varMi(finished, coor)){
+              finished.push(coor);
+              boardSymbol[coorX][coorY] = value;
+              if (counter == 2){
+                counter = 1;
+                value++;
+                continue;
+              }
+              counter++;
+            }
+          }
+        }
+        return boardSymbol;
+      }
+      function goster (boardSymbol){
+        var table = $("table tbody");
+        for (var i = 0; i < boardSymbol.length; i++){
+          var row = $("<tr>");
+          for (var j = 0; j < boardSymbol.length; j++){
+            var col = $("<td>" + boardSymbol[i][j] + "</td>");
+            if (boardSymbol[i][j] == undefined){
+              document.write("*");
+            }else{
+              document.write();
+            }
+            row.append(col);
+          }
+          table.append(row);
+          document.write("<br>");
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <table id="table">
+      <tbody>
+      </tbody>
+    </table>
+    <script>
+      var a = olustur(10);
+      goster(a);
+      var dizi = [];
+      dizi.push = [];
+
+    </script>
+  </body>
+</html>
