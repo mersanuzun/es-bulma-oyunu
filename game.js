@@ -26,19 +26,31 @@ function symbolGenerate(){
   return symbols[Math.floor(Math.random() * symbols.length)];
 }
 function createBoard(boardSize){
+  var counter = 0;
   if (boardSize % 2 == 1 || boardSize == undefined){
     return -1;
   }else{
     var finished = [];
-    for(var coorY = 0; coorY < boardSize; coorY++){
-      for(var coorX = 0; coorX < boardSize; coorX += 2){
-        symbol = symbolGenerate();
+    var symbol = symbolGenerate();
+    while (finished.length != boardSize*boardSize){
+      var coorX = Math.floor(Math.random() * boardSize);
+      var coorY = Math.floor(Math.random() * boardSize);
+      if (!isExist(finished, coorX, coorY)){
+        if (counter == 2){
+          counter = 0;
+          symbol = symbolGenerate();
+        }
         var cell = new Cell(coorX, coorY, symbol);
-        finished.push(cell);
-        cell = new Cell(coorX + 1, coorY, symbol);
+        counter++;
         finished.push(cell);
       }
     }
   }
   return finished;
+}
+function findCell(cells, coorX, coorY){
+  for (var i = 0; i < cells.length; i++){
+    if (cells[i].coorX == coorX && cells[i].coorY == coorY) break;
+  }
+  return i;
 }
