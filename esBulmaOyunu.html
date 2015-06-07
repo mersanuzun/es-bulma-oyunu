@@ -4,7 +4,7 @@
     <title></title>
     <script src="game.js"></script>
     <script type="text/javascript"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <style>
       #table {
         margin : 0px auto;
@@ -23,6 +23,23 @@
       </tbody>
     </table>
     <script>
+      $(document).ready(function(){
+        //var boardSize = prompt("Please, enter a board size. 2-4")
+        boardSize = 4;
+        var cells = createBoard(boardSize);
+        console.log(cells)
+        var table = $("#table tbody");
+        var i = 0;
+        for (var x = 0; x < boardSize; x++){
+          var row = $("<tr>");
+          for (var y = 0; y < boardSize; y++){
+            var cell = $("<td>" + cells[findCell(cells, x, y)].symbol + "</td>")
+            i++;
+            row.append(cell);
+          }
+          table.append(row);
+        }
+      })
     </script>
   </body>
 </html>
