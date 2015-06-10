@@ -15,6 +15,11 @@
         border : 1px solid;
         text-align : center;
       }
+      .hiding{
+        width : 50px;
+        height : 45px;
+        background-color: #b0c4de;
+      }
     </style>
   </head>
   <body>
@@ -24,8 +29,7 @@
     </table>
     <script>
       $(document).ready(function(){
-        //var boardSize = prompt("Please, enter a board size. 2-4")
-        boardSize = 4;
+        var boardSize = prompt("Please, enter a board size. 2-6")
         var cells = createBoard(boardSize);
         console.log(cells)
         var table = $("#table tbody");
@@ -33,12 +37,27 @@
         for (var x = 0; x < boardSize; x++){
           var row = $("<tr>");
           for (var y = 0; y < boardSize; y++){
-            var cell = $("<td>" + cells[findCell(cells, x, y)].symbol + "</td>")
+            var cell = $("<td></td>")
+            var index = x + "" + y;
+            cell.append("<div class='hiding' id='hiding" + index +"'></div>")
+            cell.data({'x' : x, 'y' : y});
+            cell.data({'symbol' : cells[findCell(cells, x, y)]});
             i++;
             row.append(cell);
           }
+          console.log(cell);
           table.append(row);
         }
+        $("table td").on("click",function(){
+          var td = $(this)
+          var col = td.data("x");
+          var row = td.data("y");
+          var symbol = td.data("symbol");
+          var index = col + "" + row;
+          td.text(symbol.symbol)
+          $("td #hiding" + index).slideToggle(3000);
+
+        })
       })
     </script>
   </body>
