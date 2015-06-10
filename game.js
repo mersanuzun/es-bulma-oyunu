@@ -6,12 +6,9 @@ function Cell(coorX, coorY, symbol){
 }
 
 
-var symbols = ["*", "&", "+", "#", "!", "|", "-", "/", "~", "<", ">", "@", "€", "$", "^", "?"];
-
-var value = 0;
-var boardControl = [];
-var boardShow = [];
-
+var symbols = ["*", "&", "+", "#", "!", "|", "-", "/", "~", "<", ">", "@", "€", "$", "^", "?",
+               "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "Q", "W", "Z", "S"
+              ];
 function isExist (finished, coorX, coorY){
   var result;
   for (value in finished){
@@ -23,7 +20,7 @@ function isExist (finished, coorX, coorY){
   return result;
 }
 function symbolGenerate(){
-  return symbols[Math.floor(Math.random() * symbols.length)];
+  return symbols.splice(Math.floor(Math.random() * symbols.length), 1);
 }
 function createBoard(boardSize){
   var counter = 0;
