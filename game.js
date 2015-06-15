@@ -58,7 +58,8 @@ function controlCell(coor){
       return;
   }else{
     if (oldCoor.symbol == coor.symbol){
-      console.log("same")
+      oldCoor.found = true;
+      coor.found = true;
       oldCoor = null;
       return true;
     }else {
@@ -68,4 +69,13 @@ function controlCell(coor){
       return oldCoorTemp;
     }
   }
+}
+
+function foundSymbol(cells){
+  var finishCounter = 1;
+  for (var i = 1; i < cells.length; i++){
+    if (cells[i].found == false) break;
+    else finishCounter++;
+  }
+  return finishCounter;
 }
