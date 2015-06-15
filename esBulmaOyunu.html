@@ -14,11 +14,12 @@
         height : 50px;
         border : 1px solid;
         text-align : center;
+
       }
       .hiding{
         width : 50px;
         height : 45px;
-        background-color: #b0c4de;
+        background-color: #fee4de;
       }
     </style>
   </head>
@@ -33,30 +34,41 @@
         var cells = createBoard(boardSize);
         console.log(cells)
         var table = $("#table tbody");
-        var i = 0;
         for (var x = 0; x < boardSize; x++){
           var row = $("<tr>");
           for (var y = 0; y < boardSize; y++){
             var cell = $("<td></td>")
-            var index = x + "" + y;
-            cell.append("<div class='hiding' id='hiding" + index +"'></div>")
+            cell.html("<div class='hiding' id=" + x+y + ">" + cells[findCell(cells, x, y)].symbol + "</div>")
+            cell.html()
             cell.data({'x' : x, 'y' : y});
             cell.data({'symbol' : cells[findCell(cells, x, y)]});
-            i++;
             row.append(cell);
           }
-          console.log(cell);
           table.append(row);
         }
+        var counter = 1;
+        var result;
+        $(".hiding").hide()
         $("table td").on("click",function(){
           var td = $(this)
           var col = td.data("x");
           var row = td.data("y");
-          var symbol = td.data("symbol");
-          var index = col + "" + row;
-          td.text(symbol.symbol)
-          $("td #hiding" + index).slideToggle(3000);
-
+          var symbolCell = td.data("symbol");
+          if (counter == 2){
+            $("#" + col+row).show();
+            result = controlCell(symbolCell);
+            if (result instanceof Cell){
+              setTimeout(function(){
+                $("#" + result.coorX+result.coorY).hide();
+                $("#" + col+row).hide();
+              },2000)
+              counter = 1;
+            }
+          }else{
+            counter++;
+            controlCell(symbolCell);
+            $("#" + col+row).show();
+          }
         })
       })
     </script>

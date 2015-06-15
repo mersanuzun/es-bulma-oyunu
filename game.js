@@ -20,7 +20,7 @@ function isExist (finished, coorX, coorY){
   return result;
 }
 function symbolGenerate(){
-  return symbols.splice(Math.floor(Math.random() * symbols.length), 1);
+  return symbols.splice(Math.floor(Math.random() * symbols.length), 1)[0];
 }
 function createBoard(boardSize){
   var counter = 0;
@@ -50,4 +50,22 @@ function findCell(cells, coorX, coorY){
     if (cells[i].coorX == coorX && cells[i].coorY == coorY) break;
   }
   return i;
+}
+var oldCoor = null;
+function controlCell(coor){
+  if (oldCoor == null) {
+      oldCoor = coor;
+      return;
+  }else{
+    if (oldCoor.symbol == coor.symbol){
+      console.log("same")
+      oldCoor = null;
+      return true;
+    }else {
+      console.log(oldCoor)
+      oldCoorTemp = oldCoor;
+      oldCoor = null;
+      return oldCoorTemp;
+    }
+  }
 }
