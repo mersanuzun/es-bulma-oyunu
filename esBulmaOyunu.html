@@ -3,6 +3,7 @@
     <meta name="name" content="content" charset="UTF-8">
     <title></title>
     <script src="game.js"></script>
+    <script src="Cell.js"></script>
     <script type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <style>
@@ -52,22 +53,25 @@
           var col = td.data("x");
           var row = td.data("y");
           var symbolCell = td.data("symbol");
-          if (counter == 2){
-            $("#" + col+row).show();
-            result = controlCell(symbolCell);
-            if (result instanceof Cell){
-              setTimeout(function(){
-                $("#" + result.coorX+result.coorY).hide();
-                $("#" + col+row).hide();
-              },1000)
-              counter = 1;
+          if (foundSymbol(cells) == boardSize * boardSize) alert("GAME IS FINISHED");
+          else{
+            if (counter == 2){
+              $("#" + col+row).show();
+              result = controlCell(symbolCell);
+              if (result instanceof Cell){
+                setTimeout(function(){
+                  $("#" + result.coorX+result.coorY).hide();
+                  $("#" + col+row).hide();
+                },1000)
+                counter = 1;
+              }else{
+                if (foundSymbol(cells) == boardSize * boardSize) alert("GAME IS FINISHED");
+              }
             }else{
-              if (foundSymbol(cells) == boardSize * boardSize) alert("GAME IS FINISHED");
+              counter++;
+              controlCell(symbolCell);
+              $("#" + col+row).show();
             }
-          }else{
-            counter++;
-            controlCell(symbolCell);
-            $("#" + col+row).show();
           }
         })
       })
