@@ -1,5 +1,3 @@
-
-
 var symbols = ["*", "&", "+", "#", "!", "|", "-", "/", "~", "<", ">", "@", "€", "$", "^", "?",
                "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "Q", "W", "Z", "S"
               ];
@@ -9,7 +7,7 @@ function isExist (finished, coorX, coorY){
     if (finished[value].coorX == coorX && finished[value].coorY == coorY) {
       result = true;
       break;
-    }else result = false;
+        }else result = false;
   }
   return result;
 }
@@ -22,6 +20,13 @@ function createBoard(boardSize){
     return -1;
   }else{
     var finished = [];
+    var s = [];
+    for (var i = 0; i < boardSize; i++){
+        s.push([]);
+        for(var j = 0 ; j < boardSize; j++){
+            s[i].push([]);
+        }
+    }
     var symbol = symbolGenerate();
     while (finished.length != boardSize*boardSize){
       var coorX = Math.floor(Math.random() * boardSize);
@@ -37,7 +42,12 @@ function createBoard(boardSize){
       }
     }
   }
-  return finished;
+  for (var i = 0; i < boardSize; i++){
+      for (var j = 0; j < boardSize; j++){
+          s[i][j] = finished[findCell(finished, i, j)]
+      }
+  }
+  return s;
 }
 function findCell(cells, coorX, coorY){
   for (var i = 0; i < cells.length; i++){
@@ -63,13 +73,4 @@ function controlCell(coor){
       return oldCoorTemp;
     }
   }
-}
-
-function foundSymbol(cells){
-  var finishCounter = 1;
-  for (var i = 1; i < cells.length; i++){
-    if (cells[i].found == false) break;
-    else finishCounter++;
-  }
-  return finishCounter;
 }
