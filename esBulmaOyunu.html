@@ -47,7 +47,7 @@
           table.append(row);
         }
         $("#table td").on("click", function(){
-            if (correct == boardSize) return
+            if (correct == (boardSize * boardSize) / 2) return
             $that = $(this);
             var xCoor = $that.data("x");
             var yCoor = $that.data("y");
@@ -72,7 +72,7 @@
                     console.log(correct)
                 }
                 click = 1;
-                if (correct == boardSize) alert("GAME IS FINISHED")
+                if (correct == (boardSize * boardSize) / 2) alert("GAME IS FINISHED")
             }
         });
       })
