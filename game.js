@@ -1,6 +1,7 @@
 var symbols = ["*", "&", "+", "#", "!", "|", "-", "/", "~", "<", ">", "@", "€", "$", "^", "?",
                "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "Q", "W", "Z", "S"
               ];
+var guess = 0;
 function isExist (finished, coorX, coorY){
   var result;
   for (value in finished){

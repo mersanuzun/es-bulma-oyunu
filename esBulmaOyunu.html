@@ -21,6 +21,9 @@
         height : 45px;
         background-color: #fee4de;
       }
+        #guess {
+            margin-left: 41%;
+        }
     </style>
   </head>
   <body>
@@ -28,6 +31,7 @@
       <tbody>
       </tbody>
     </table>
+    <b><span id="guess"></span></b>
     <script>
       $(document).ready(function(){
         var boardSize = prompt("Please, enter a board size. 2-4-6-8")
@@ -71,8 +75,12 @@
                     correct++;
                     console.log(correct)
                 }
+                guess++;
+                console.log(guess)
                 click = 1;
-                if (correct == (boardSize * boardSize) / 2) alert("GAME IS FINISHED")
+                if (correct == (boardSize * boardSize) / 2) {
+                    $("#guess").text("Game is finished. You made " + guess + " guess.")
+                }
             }
         });
       })
